@@ -2,19 +2,83 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# Process Monitoring Dashboard
 
-This contains everything you need to run your app locally.
+A comprehensive dashboard for monitoring truck movements through gate in/out stations and weighing bridge operations.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1r5YEP19q-tlQUA9XrO7PGnaJ-l3ppTQi
+## Features
 
-## Run Locally
+- Real-time monitoring of Gate In, Gate Out, and Weighing Bridge stations
+- Live camera feeds and transaction images
+- Truck activity tracking and status updates
+- Responsive design for desktop and mobile devices
+- Docker support for easy deployment
 
-**Prerequisites:**  Node.js
+## Quick Start
 
+### Using Docker (Recommended)
+
+1. Build and run with Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Access the dashboard at: http://localhost:3111
+
+### Local Development
+
+**Prerequisites:** Node.js and pnpm
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   pnpm install
+   ```
+
+2. Run the development server:
+   ```bash
+   pnpm run dev
+   ```
+
+3. Open your browser and navigate to: http://localhost:3000
+
+## Project Structure
+
+- `src/components/` - React components for the dashboard
+- `src/types.ts` - TypeScript type definitions
+- `src/constants.ts` - Initial station and activity data
+- `Dockerfile` - Docker configuration for production deployment
+- `docker-compose.yml` - Docker Compose configuration
+- `nginx.conf` - Nginx configuration for production serving
+
+## Docker Deployment
+
+The application is containerized using a multi-stage Docker build:
+
+1. **Builder Stage**: Builds the React application using Node.js and pnpm
+2. **Production Stage**: Serves the built application using Nginx
+
+To deploy:
+
+```bash
+# Build the image
+docker build -t process-monitoring-dashboard .
+
+# Run the container
+docker run -p 3111:80 process-monitoring-dashboard
+```
+
+## Configuration
+
+The dashboard simulates real-time truck activity with:
+- Automatic status updates every 5 seconds
+- Random truck images for gate stations and heavy equipment for weighing bridges
+- Dynamic activity generation and tracking
+- Weight measurements for weighing bridge stations
+
+## Technology Stack
+
+- **Frontend**: React 19 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Deployment**: Docker with Nginx
+- **Package Manager**: pnpm
